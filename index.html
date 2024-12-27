@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TombolaHomemade</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Link al font Google "Mountains of Christmas" -->
+  <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet"> 
+
+</head>
+  
+<body>
+  <div class="grid-container">
+    <h1>Gioco della Tombola</h1>
+    <div class="container">
+      <div class="sidebar">
+        <div class="lucky-number-box">
+          <p>Lucky number:</p>
+          <div class="lucky-number" id="luckyNumber"></div>
+
+
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="sidebar">
+
+
+        <div class="info-box">
+          <p>Ultimo numero:</p>
+          <div class="last-clicked" id="lastClicked">
+            <div class="last-number"> X </div>
+          </div>
+        </div>
+        
+                <!-- Nuovo info box -->
+        <div class="info-box">
+          <h3>Premi:</h3>
+          <div class="icon-grid">
+            <div class="icon" id="icon1">Terna</div>
+            <div class="icon" id="icon2">Quat.</div>
+            <div class="icon" id="icon3">Quint.</div>
+            <div class="icon" id="icon4">Tombola</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+  <footer>
+    &copy; 2024 Creato da Vincenzo D.
+    <br>
+    Last update: 27/12/2024 - 9:30
+  </footer>
+
+  </div>
+  
+    <script>
+
+      var tombola_snd = new Audio("WinnerSong_1.mp3");
+      var smallprize_snd = new Audio("SmallPrizeSong_1.mp3");
+
+      const grid = document.getElementById("grid");
+      const lastClicked = document.getElementById("lastClicked");
+      const clickedNumbers = []; // Array per memorizzare i numeri cliccati
+      const luckyNumberBox = document.getElementById("luckyNumber");
+
+      // Genera il numero fortunato casuale tra 1 e 90
+      const luckyNumber = Math.floor(Math.random() * 90) + 1;
+      luckyNumberBox.textContent = luckyNumber;
+
+  
+      // Genera 6 celle nella griglia
+      for (let cellIndex = 0; cellIndex < 6; cellIndex++) {
+        const cellDiv = document.createElement("div");
+        cellDiv.className = "cell";
+
+  
+        // Aggiungi 15 numeri a ogni cella
+        for (let i = 0; i < 15; i++) {
+          const numberDiv = document.createElement("div");
+          numberDiv.className = "number";
+          numberDiv.textContent = (i+1) + 5*Math.floor(i/5) + 5*(cellIndex%2) + 30*Math.floor((cellIndex)/2); // Assegna il numero
+
+  
+          // Evento di click sul numero
+          numberDiv.addEventListener("click", () => {
+            //readNumber(numberDiv.textContent);
+            numberDiv.classList.toggle("clicked");
+  
+            // Aggiungi il numero cliccato all'array, evitando duplicati
+            if (!clickedNumbers.includes(numberDiv.textContent)) {
+              clickedNumbers.push(numberDiv.textContent);
+            } else {
+                clickedNumbers.splice(clickedNumbers.indexOf(numberDiv.textContent),1)
+            }
+  
+            // Aggiorna la visualizzazione degli ultimi numeri cliccati
+            updateLastClicked();
+
+          });
+  
+          cellDiv.appendChild(numberDiv); // Inserisci il numero nella cella
+        }
+  
+        grid.appendChild(cellDiv); // Inserisci la cella nella griglia
+      }
+  
+      // Funzione per aggiornare la visualizzazione degli ultimi numeri cliccati
+      function updateLastClicked() {
+        lastClicked.innerHTML = ""; // Svuota l'elemento
+
+        const lastNumberDiv = document.createElement("div");
+        lastNumberDiv.className = "last-number";
+
+        if (clickedNumbers.length != 0) {
+          lastNumberDiv.textContent = clickedNumbers[clickedNumbers.length-1];
+        } else {
+          lastNumberDiv.textContent = " X ";
+        }
+
+        lastClicked.appendChild(lastNumberDiv)
+
+        /*
+        clickedNumbers.forEach((num) => {
+            const lastNumberDiv = document.createElement("div");
+            lastNumberDiv.className = "last-number";
+            lastNumberDiv.textContent = num;
+            lastClicked.appendChild(lastNumberDiv);
+        });
+
+        */   
+
+      }
+
+    // Funzione per leggere un numero
+    function readNumber(number) {
+      const utterance = new SpeechSynthesisUtterance(`${number}`);
+      utterance.lang = 'it-IT'; // Italiano
+      speechSynthesis.speak(utterance);
+    }
+
+        // Gestione click sulle icone
+      const icons = document.querySelectorAll('.icon');
+      icons.forEach(icon => {
+        icon.addEventListener('click', () => {
+          if (!icon.classList.contains("red")) {
+            if (icon.id == "icon4") {
+              tombola_snd.play();
+            } else {
+              smallprize_snd.play();
+            }        
+          } else {
+            tombola_snd.pause();
+            tombola_snd.currentTime = 0;
+          }
+          icon.classList.toggle('red'); // Cambia colore tra verde e rosso
+      });
+    });
+
+
+    </script>
+  </body>
+</html>
