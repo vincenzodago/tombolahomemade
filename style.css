@@ -1,0 +1,182 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fef7f1;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    margin-top: 0px;
+    font-size: 70px;
+    color: #e74c3c;
+    margin-bottom: 20px;
+    font-family: 'Mountains of Christmas', cursive; /* Applica il font */
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne */
+    grid-template-rows: repeat(3, auto);   /* 3 righe */
+    gap: 20px;
+  }
+
+  .cell {
+    background-color: #f7f3f0;
+    padding: 10px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Ogni cella con 5 colonne */
+    gap: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .number {
+    width: 60px;
+    height: 60px;
+    background-color: #E9DDD2f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    color: #b5a89e;
+    font-weight: bold;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .number.clicked {
+    background-color: #f9a825;
+    color: white;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .title {
+    margin-top: 0px;
+    font-size: 24px;
+    color: #e74c3c;
+  }
+
+  .info-box {
+    margin-left: 50px;
+    background-color: #f7f3f0;
+    font-weight: bold;
+    padding: 10px 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: #b5a89e;
+    font-size: 28px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .last-clicked {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .last-number {
+    width: 240px;
+    height: 240px;
+    background-color: #f9a825;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    color: white;
+    font-weight: bold;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .lucky-number-box {
+    margin-right: 50px;
+    background-color: #f7f3f0;
+    font-weight: bold;
+    padding: 10px 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: #b5a89e;
+    font-size: 28px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .lucky-number {
+    width: 240px;
+    height: 240px;
+    background-color: green;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    color: white;
+    font-weight: bold;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  footer {
+    color: black;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: bold;
+    width: 100%;
+  }
+
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .icon {
+    width: 115px;
+    height: 50px;
+    background-color: green;
+    border-radius: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .icon.red {
+    background-color: red;
+  }
